@@ -73,29 +73,37 @@
       {{ page.content }}
     </div>{# /.layout-content #}
 
-    {% if page.sidebar_first %}
-      <aside class="layout-sidebar-first {{ sidebarfw }}" role="complementary">
-        {{ page.sidebar_first }}
-      </aside>
-    {% endif %}
+    <!-- SIDEBAR REGIONS REMOVED -->
 
-    {% if page.sidebar_second %}
-      <aside class="layout-sidebar-second {{ sidebarsw }}" role="complementary">
-        {{ page.sidebar_second }}
-      </aside>
-    {% endif %}
     </div><!--/.container -->  
    </div><!-- /#contentheader --> 
   </main>
 
-  {% if page.footer %}
+  {# {% if page.primary_footer %} #}
   <footer role="contentinfo" class="section">
    <div class="container">
-    <div class="row">
-     <div class="col-md-12">	 
-      {{ page.footer }}
-	 </div> 
-	</div><!--/.container -->  
+      {% if page.social_menu %}
+      <div class="row ypm-nav-social">
+        <div class="col-md-12">
+          {{ page.social_menu }}
+        </div>
+      </div> <!-- /.row -->
+      {% endif %}
+      <div class="row ypm-nav-footer">
+        {% if page.secondary_footer %}
+        <div class="col-xs-12 col-md-2 col-lg-1">	 
+          {{ page.secondary_footer }}
+        </div>
+        <div class="col-xs-12 col-md-10 col-lg-11">	 
+          {{ page.primary_footer }}
+        </div>
+        {% else %}
+        <div class="col-md-12">	 
+          {{ page.primary_footer }}
+        </div>
+        {% endif %}
+      </div><!-- /.row -->
+	  </div><!-- /.container -->  
    </div><!-- /#contentheader --> 
   </footer>
-  {% endif %}
+  {# {% endif %} #}

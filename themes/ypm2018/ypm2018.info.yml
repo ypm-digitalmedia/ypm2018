@@ -9,16 +9,18 @@ libraries:
 
 regions:
   header: Header
-  primary_menu: Primary menu
-  secondary_menu: Secondary Menu
+  primary_menu: Primary Links
+  secondary_menu: Secondary Links
   help: Help
   page_top: 'Page top'
   page_bottom: 'Page bottom'
   highlighted: Highlighted
   content: Content
-  sidebar_first: 'Sidebar first'
-  sidebar_second: 'Sidebar second'
-  footer: Footer
+  # sidebar_first: 'Sidebar first'
+  # sidebar_second: 'Sidebar second'
+  primary_footer: Primary Footer
+  secondary_footer: Secondary Footer
+  social_menu: Social Media Links
 
 # Information added by Drupal.org packaging script on 2016-07-08
 version: '0.0.1'

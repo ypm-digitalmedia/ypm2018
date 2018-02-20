@@ -32,7 +32,7 @@
  */
 #}
 {% set heading_id = attributes.id ~ '-menu'|clean_id %}
-<nav role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass('navbar navbar-default')|without('role', 'aria-labelledby') }}>
+<nav class="ypm-nav-main-menu" role="navigation" aria-labelledby="{{ heading_id }}"{{ attributes.addClass('navbar navbar-default')|without('role', 'aria-labelledby') }}>
   {# Label. If not displayed, we still provide it for screen readers. #}
   {% if not configuration.label_display %}
     {% set title_attributes = title_attributes.addClass('visually-hidden') %}
@@ -41,11 +41,9 @@
   <h2{{ title_attributes }}>{{ configuration.label }}</h2>
   {{ title_suffix }}
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed navbar-toggle-plain" data-toggle="collapse" data-target="#main-menu" aria-expanded="false" aria-controls="main-menu" title="Toggle navigation" alt="Toggle navigation" aria-label="Toggle navigation">
         <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span><strong>Menu </strong> <i class="fas fa-bars"></i></span>
       </button>
     </div>
   {# Menu. #}

@@ -1,7 +1,8 @@
 @import url("mallory_font.css");
+@import url("../fonts/FontAwesome_5.0.6/css/fontawesome-all.min.css");
 
 /* ==================================================================================
-   PAGE ELEMENTS
+   PAGE ELEMENTS & BOOTSTRAP OVERRIDES
    ================================================================================== */
 
 body {
@@ -11,20 +12,31 @@ body {
     font-family: 'Mallory MP Light', sans-serif;
     font-size: 14px;
     color: black;
+    /* width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%; */
 }
 
 .header {
     background-color: #dde6ee;
 }
 
-.ypm-nav-admin ul {
-    list-style-type: none;
+
+/* .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+ */
+
+header {
+    padding-left: 0!important;
+    padding-right: 0!important;
 }
 
-.ypm-nav-admin ul li {
-    list-style: none;
-    display: inline-block;
-    padding-right: 1em;
+footer {
+    /* border-top: 1px #ddd solid; */
+    margin-top: 10em;
 }
 
 
@@ -91,23 +103,78 @@ a:active {
     transition: 0.3s all;
 }
 
-
-/* ==================================================================================
-   CUSTOM HEADINGS & TYPOGRAPHY
-   ================================================================================== */
-
-
-/*  HEADINGS */
-
 h1.page-title {
     text-align: center;
 }
 
-
-/* TYPOGRAPHY */
-
 .paragraph p {
     line-height: 1.5rem;
+}
+
+
+/* ==================================================================================
+   NAVIGATION
+   ================================================================================== */
+
+.ypm-nav-container {
+    /* Main nav area */
+    -o-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25);
+    background-color: cornflowerblue;
+}
+
+.ypm-nav-main ul {
+    text-align: right;
+}
+
+.ypm-nav-admin ul {
+    list-style-type: none;
+}
+
+.ypm-nav-admin ul li {
+    list-style: none;
+    display: inline-block;
+    padding-right: 1em;
+}
+
+.ypm-nav-footer {
+    font-size: 0.75rem;
+    padding-top: 2em;
+    border-top: 1px #ddd solid;
+}
+
+.ypm-nav-footer ul {
+    text-align: left;
+    /* display: list-item; */
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.ypm-nav-footer ul:after {
+    content: '\00a0\00a0\2022';
+}
+
+.ypm-nav-footer ul li {
+    float: left;
+    list-style: none;
+}
+
+.ypm-nav-footer ul li:before {
+    content: '\2022';
+    margin-right: 0.3em;
+    margin-left: 0.3em;
+}
+
+.ypm-nav-main-menu {}
+
+.navbar-toggle-plain {
+    color: white;
+    float: right;
+    clear: both;
+    border: none;
+    background: none;
 }
 
 
@@ -187,6 +254,8 @@ ul.social-icons li {
     line-height: 48px;
     width: 48px;
     vertical-align: middle;
+    -o-transition: 0.5s all ease-in-out;
+    -moz-transition: 0.5s all ease-in-out;
     -webkit-transition: 0.5s all ease-in-out;
     transition: 0.5s all ease-in-out;
     min-height: 1.8em;
@@ -200,30 +269,40 @@ ul.social-icons li a {
 
 ul.social-icons li:hover {
     border-radius: 50%;
+    -o-transition: 0.5s all ease-in-out;
+    -moz-transition: 0.5s all ease-in-out;
     -webkit-transition: 0.5s all ease-in-out;
     transition: 0.5s all ease-in-out;
 }
 
 li.social-icon-youtube:hover {
     background: #e62117;
+    -o-transition: 0.5s all ease-in-out;
+    -moz-transition: 0.5s all ease-in-out;
     -webkit-transition: 0.5s all ease-in-out;
     transition: 0.5s all ease-in-out;
 }
 
 li.social-icon-facebook:hover {
     background: #3b5998;
+    -o-transition: 0.5s all ease-in-out;
+    -moz-transition: 0.5s all ease-in-out;
     -webkit-transition: 0.5s all ease-in-out;
     transition: 0.5s all ease-in-out;
 }
 
 li.social-icon-twitter:hover {
     background: #00b0ed;
+    -o-transition: 0.5s all ease-in-out;
+    -moz-transition: 0.5s all ease-in-out;
     -webkit-transition: 0.5s all ease-in-out;
     transition: 0.5s all ease-in-out;
 }
 
 li.social-icon-instagram:hover {
     background: #bc2a8d;
+    -o-transition: 0.5s all ease-in-out;
+    -moz-transition: 0.5s all ease-in-out;
     -webkit-transition: 0.5s all ease-in-out;
     transition: 0.5s all ease-in-out;
 }
