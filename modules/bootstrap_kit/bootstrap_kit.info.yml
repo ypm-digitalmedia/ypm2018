@@ -1,0 +1,16 @@
+name: 'Bootstrap Kit'
+description: 'Set of default layouts for Bootstrap 4.'
+package: Bootstrap
+type: module
+# core: 8.x
+dependencies:
+  - layout_discovery
+simplytest_dependencies:
+  - bricks
+  - tweme
+
+# Information added by Drupal.org packaging script on 2017-06-12
+version: '8.x-4.2'
+core: '8.x'
+project: 'bootstrap_kit'
+datestamp: 1497284045

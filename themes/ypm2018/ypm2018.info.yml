@@ -1,0 +1,27 @@
+name: YPM2018
+type: theme
+description: Yale Peabody Museum Drupal 8 Theme for 2018.  By Andy Melien.  Based on 'Miss'
+
+libraries:
+  - ypm2018/tether
+  - ypm2018/bootstrap
+  - ypm2018/globalstyle
+
+regions:
+  header: Header
+  primary_menu: Primary menu
+  secondary_menu: Secondary Menu
+  help: Help
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  highlighted: Highlighted
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: Footer
+
+# Information added by Drupal.org packaging script on 2016-07-08
+version: '0.0.1'
+core: '8.x'
+project: 'ypm2018'
+datestamp: 1467944061

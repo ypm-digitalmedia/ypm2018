@@ -1,0 +1,15 @@
+name: 'Bootstrap Kit Demo'
+description: 'Example page powered by Bricks and Bootstrap Kit.'
+package: Bootstrap
+type: module
+# core: 8.x
+dependencies:
+  - bootstrap_kit
+  - bricks
+  - bricks_default
+
+# Information added by Drupal.org packaging script on 2017-06-12
+version: '8.x-4.2'
+core: '8.x'
+project: 'bootstrap_kit'
+datestamp: 1497284045
