@@ -70,6 +70,17 @@
  *   in different view modes.
  */
 #}
+
+{% if content.field_slider_images %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 ypm-slider-container">
+            {{ content.field_slider_images }}
+        </div> <!-- /.col -->
+    </div><!-- /.row -->
+</div> <!-- /.container -->
+{% endif %}
+    
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -85,17 +96,14 @@
 </div> <!-- /.container -->
 
 
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-          <div{{ content_attributes }}>
-              <article{{ attributes }}>
-            {{ content }}
-              </article>
-          </div>
+            <article{{ attributes }}>
+              <div{{ content_attributes }}>
+                {{ content.field_paragraphs_content }}
+              </div>
+            </article>
         </div> <!-- /.col -->
     </div><!-- /.row -->
 </div> <!-- /.container -->

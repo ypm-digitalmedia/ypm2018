@@ -62,21 +62,21 @@
 </div> <!-- /#header -->
 
   <main role="main" class="section">
+   <div class="container-fluid">
+    <div class="row ypm-slider-container">
+    </div><!-- /.row -->
+   </div> <!-- /.container -->
    <div class="container">
-    <div class="row">	
-    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-   {{ page.breadcrumb }}{# region--breadcrumb.html.twig #}
-   {{ page.help }}   
-   {{ page.highlighted }}{# region--highlighted.html.twig #}
-   {# div contenar with col-md-12 will be print from block specific template for above 3 variables #}
-    <div class="content {{ contentwidth }}">
+     <div class="row">	
+        <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+       {{ page.highlighted }}{# region--highlighted.html.twig #}
+       {{ page.breadcrumb }}{# region--breadcrumb.html.twig #}
+       {{ page.help }}
+     </div><!-- /.row -->
+   </div><!-- /container --> 
+    <div class="content">
       {{ page.content }}
     </div>{# /.layout-content #}
-
-    <!-- SIDEBAR REGIONS REMOVED -->
-
-    </div><!--/.container -->  
-   </div><!-- /#contentheader --> 
   </main>
 
   {# {% if page.primary_footer %} #}

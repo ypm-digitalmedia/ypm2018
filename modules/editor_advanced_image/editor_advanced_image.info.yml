@@ -1,0 +1,15 @@
+name: 'Editor Advanced Image'
+type: module
+description: 'Enhances the inline-image Dialog in D8 CKEditor.'
+# core: 8.x
+package: CKEditor
+
+dependencies:
+  - drupal:editor
+  - drupal:ckeditor
+
+# Information added by Drupal.org packaging script on 2018-02-21
+version: '8.x-1.0-beta4'
+core: '8.x'
+project: 'editor_advanced_image'
+datestamp: 1519198697

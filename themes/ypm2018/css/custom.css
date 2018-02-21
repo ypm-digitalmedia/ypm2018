@@ -36,9 +36,13 @@ header {
 
 footer {
     /* border-top: 1px #ddd solid; */
-    margin-top: 10em;
+    margin-top: 5em;
 }
 
+.ypm-slider-container {
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
 
 /* ==================================================================================
    HEADINGS & TYPOGRAPHY
@@ -105,6 +109,13 @@ a:active {
 
 h1.page-title {
     text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.social_menu h2 {
+    visibility: hidden;
+    text-align: right;
 }
 
 .paragraph p {
