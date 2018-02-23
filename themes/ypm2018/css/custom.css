@@ -39,9 +39,8 @@ footer {
     margin-top: 5em;
 }
 
-.ypm-slider-container {
-    padding-left: 0!important;
-    padding-right: 0!important;
+.paragraph>.paragraph__column {
+    padding-bottom: 0;
 }
 
 /* ==================================================================================
@@ -72,7 +71,7 @@ h1 {
 }
 
 h2 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
 }
 
 h3 {
@@ -122,6 +121,14 @@ h1.page-title {
     line-height: 1.5rem;
 }
 
+h2.section-title {
+    text-align: center;
+}
+
+h2.section-subtitle {
+    text-align: center;
+    font-size: 1.75rem!important;
+}
 
 /* ==================================================================================
    NAVIGATION
@@ -236,10 +243,268 @@ h1.page-title {
    CARDS
    ================================================================================== */
 
+.box {
+    margin: 1em;
+    /*border: #708fb8 1px solid;
+    border-top: #708fb8 8px solid;*/
+    /*padding: 1em;*/
+}
+
+.box p {
+    /*text-align: justify;*/
+    font-size: 13px;
+    text-align: left;
+}
+
+.box hr {
+    margin: 5px auto;
+}
+
+.box h2 {
+    margin: 0 0 0.5em 0;
+}
+
+.box-with-header {
+    border: #708fb8 1px solid;
+    padding: 0 0 1em 0;
+    margin: 1em;
+}
+
+.box-with-header p {
+    padding: 1em;
+    text-align: justify;
+}
+
+.box-with-header h2.box-header {
+    width: 100%;
+    background-color: #708fb8;
+    padding: 0.25em 0.5em;
+    margin: 0;
+    color: white;
+}
+
+.back .box-header {
+    margin-top: 0;
+}
+
+.back h2,
+.back h3 {
+    margin-top: 10px;
+}
+
+.box-with-footer {
+    border: #708fb8 1px solid;
+    padding: 0 0 1em 0;
+    margin: 1em;
+}
+
+.box-with-footer p {
+    padding: 1em;
+    text-align: justify;
+}
+
+.box-with-footer h2.box-footer {
+    width: 100%;
+    background-color: #708fb8;
+    padding: 0.25em 0.5em;
+    margin: 0;
+    color: white;
+}
+
+.box-item {
+    width: 100%;
+    height: 100%;
+    /*position: absolute;*/
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    padding: 0;
+    height: 300px;
+    min-height: 300px;
+    margin-left: 5px;
+    -webkit-transform: translateX(-5px);
+    -moz-transform: translateX(-5px);
+    transform: translateX(-5px);
+}
+
+.box-item:hover {
+    /*box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);*/
+    cursor: pointer;
+}
+
+.front-content {
+    height: 100%;
+    width: 100%;
+}
+
+.back-content {
+    height: 100%;
+    width: 100%;
+}
+
+
+.box-item figure {
+    margin: 0;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: 0.5s all ease-out;
+    -moz-transition: 0.5s all ease-out;
+    transition: 0.5s all ease-out;
+    padding: 1em;
+}
+
+.box-item.box-with-header figure {
+    padding: 0;
+}
+
+.box-item .front {
+    height: 100%;
+    width: 100%;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+    opacity: 1;
+    overflow-y: hidden;
+    -webkit-transition: 0.6s all ease-out;
+    -moz-transition: 0.6s all ease-out;
+    transition: 0.6s all ease-out;
+}
+
+.box-item .back {
+    /*transform: rotateY(180deg) translateY(-300px);*/
+    height: 100%;
+    width: 100%;
+    -webkit-transform: translateY(-300px);
+    -moz-transform: translateY(-300px);
+    transform: translateY(-300px);
+    background-color: white;
+    overflow: hidden;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+/*    opacity: 0;*/
+    -webkit-transition: 0.6s all ease-out;
+    -moz-transition: 0.6s all ease-out;
+    transition: 0.6s all ease-out;
+}
+
+.shadow {
+    -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.box-item.flipped {
+    -webkit-transform: rotateY( 180deg);
+    -moz-transform: rotateY( 180deg);
+    transform: rotateY( 180deg);
+}
+
+.card-container {
+    perspective: 800px;
+    position: relative;
+}
+
+.diagonal-back {
+    background-size: cover;
+    background-image: url('../img/cards/diagonal_blue_2.png');
+    background-position: center;
+}
+
+.back-top {
+    width: 100%;
+    height: 50%;
+}
+
+.back-bottom {
+    width: 100%;
+    height: 50%;
+}
+
+.back-right {
+    text-align: right;
+}
+
+.back-left {
+    text-align: left;
+}
+
+.back-right p {
+    text-align: right;
+}
+
+.photo-front {
+    background-size: cover;
+}
+
+.photo-front-shadow,
+.photo-front-shadow-top {
+    -webkit-box-shadow: inset 0 100px 70px -26px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0 100px 70px -26px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 100px 70px -26px rgba(0, 0, 0, 0.5);
+}
+
+.photo-front-shadow-bottom {
+    -webkit-box-shadow: inset 0 -70px 70px -26px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0 -70px 70px -26px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 -70px 70px -26px rgba(0, 0, 0, 0.5);
+}
+
+.photo-front-shadow-topbottom {
+    -webkit-box-shadow: inset 0 100px 70px -26px rgba(0, 0, 0, 0.5), inset 0 -50px 70px -26px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: inset 0 100px 70px -26px rgba(0, 0, 0, 0.5), inset 0 -50px 70px -26px rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 100px 70px -26px rgba(0, 0, 0, 0.5), inset 0 -50px 70px -26px rgba(0, 0, 0, 0.5);
+}
+
+.box-header {
+    -webkit-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    -moz-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+.box-date {
+    position: absolute;
+    bottom: 0;
+    -webkit-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    -moz-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+.box-date-right {
+    float: right;
+    text-align: right;
+    right: 30px;
+}
+
+.box-date-left {
+    float: left;
+    text-align: left;
+    left: 15px;
+}
+
+.box-with-header .box-date {
+    position: relative;
+    top: 220px;
+}
+
+.box .box-date-right {
+    margin-right: -1em;
+}
+
+.box-with-header .box-date-right {
+    margin-right: 0;
+}
+
 
 /* ==================================================================================
    SLIDERS
    ================================================================================== */
+
+.ypm-slider-container {
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
 
 .owl-wrapper-outer {
     height: 500px;

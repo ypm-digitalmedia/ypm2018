@@ -97,11 +97,25 @@
 
 
 <div class="container">
+    
+
     <div class="row">
         <div class="col-md-12">
             <article{{ attributes }}>
               <div{{ content_attributes }}>
+                  
                 {{ content.field_paragraphs_content }}
+                  
+                  {#
+                  
+                  {% for key,paragraph in content.field_paragraphs_content if key|first != '#' %}
+                    
+                      <p>{{paragraph.field_type}}</p>
+                    
+                  {% endfor %}
+                  
+                      #}
+                      
               </div>
             </article>
         </div> <!-- /.col -->

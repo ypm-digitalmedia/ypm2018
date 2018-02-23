@@ -41,3 +41,19 @@ function miss_theme_suggestions_block_alter(array &$suggestions, array $variable
     }
 
 }
+
+/**
+ * Implements hook_preprocess_paragraph().
+ * @param $variables
+ */
+function ypm2018_preprocess_paragraph(&$variables) {
+  $variables['is_front'] = Drupal::service('path.matcher')->isFrontPage();
+
+  // Ensure the cache varies correctly.
+  // Drupal 8.2.x or lower
+  $variables['#cache']['contexts'][] = 'url.path';
+
+  // Ensure the cache varies correctly.
+  // Drupal 8.3.x+
+  $variables['#cache']['contexts'][] = 'url.path.is_front'; 
+}
