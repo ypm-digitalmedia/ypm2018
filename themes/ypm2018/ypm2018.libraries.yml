@@ -1,9 +1,16 @@
 globalstyle:
   version: 1.x
+  header: true
   css:
     theme:
+      fonts/FontAwesome_5.0.6/css/fontawesome-all.min.css: {}
       css/custom.css: {}
       css/microrules.css: {}
+  js:
+    lib/lodash/lodash.min.js: {}
+    lib/jquery/dist/jquery.min.js: {}
+    lib/jquery/external/jquery.mobile-events.js: {}
+    lib/custom.js: {}
 
 tether:
   js:
@@ -16,7 +23,6 @@ bootstrap:
       css/bootstrap.css: {}
   js:
     lib/bootstrap4/dist/js/bootstrap.min.js: {}
-
 
 
 # font-awesome:

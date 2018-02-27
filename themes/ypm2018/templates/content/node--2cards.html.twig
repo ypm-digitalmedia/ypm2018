@@ -73,6 +73,7 @@
 
 
 {########################################## VARIABLES ##########################################}
+
 {% set seed = random() %}
 
 {# FRONT FADE #}
@@ -109,70 +110,98 @@
 {% set cardType = 'unknown' %}
 {% endif %}
 
+{########################################## TEMPLATES ##########################################}
+
    <div class="col-md-6">
     <div class="box-item box" id="card_{{ node.id }}_{{ seed }}">
         {# FRONT #}
         <figure alt="{{ content.field_front_title.0 }}" class="front photo-front {{ frontFadeClass }}" style="background-image:url('{{ frontImage }}'); background-position: {{ content.field_front_image_alignment.0 }};">
             <div class="front-content">
                 <h3 class="box-header">{{ content.field_front_title.0 }}</h3>
-                <strong class="box-date box-date-right">{{ content.field_front_subtitle.0 }}</strong>
+                {% if content.field_front_subtitle %}
+                    <strong class="box-date box-date-{{ frontSubtitleAlignment }}">{{ content.field_front_subtitle.0 }} </strong>
+                {% endif %}
             </div>
         </figure> {# /FRONT #}
+        
         {# BACK #}
-        <figure class="back">
-            <div class="back-content">
-            {# BREAK - CARD TYPES #}
+        
+        {# BREAK - CARD TYPES #}
+
+        {% if cardType == 'event_exhibit' %}
+            <figure class="back">    
+                <div class="back-content">
+                    {% if content.field_back_heading %}
+                        <strong class="box-header">{{ content.field_back_heading.0 }}</strong>
+                    {% endif %}
+                    {% if content.field_back_title %}
+                        <h3 class="left plain-case normal-weight mallory-thin exhibit-heading" id="card_evex_title{{ node.id }}_{{ seed }}">{{ content.field_back_title.0 }}</h3>
+                    {% endif %}
+                    {% if content.field_back_subtitle %}
+                        <h4 class="left plain-case normal-weight mallory-mp-light exhibit-subheading" id="card_evex_subtitle{{ node.id }}_{{ seed }}">{{ content.field_back_subtitle.0 }}</h4>
+                    {% endif %}
+                    <hr />
+                    {{ content.body.0 }}
+
+                    {% if content.field_back_date_line %}
+                        <p>{{ content.field_back_date_line.0 }}</p>
+                    {% endif %}  
+                    {% if content.field_back_button %}
+                        <p class="button-row"><a data-link-parent="card_evex_{{ node.id }}_{{ seed }}" class="btn btn-peabody back-link" href="{{ node.field_back_button[0].url }}" role="button" title="More info: {{ node.label }}" aria-label="More info: {{ node.label }}">{{ node.field_back_button[0].title }}</a></p>
+                    {% endif %}
+                </div>
+            </figure>
             
-            {% if cardType == 'event_exhibit' %}
-                
-                <strong class="box-header">{{ content.field_back_heading.0 }}</strong>
-                <h3 class="left plain-case mallory-thin exhibit-heading" id="exhibit1_alt_heading_back">Gallery Talks</h3>
-                <h5 class="left plain-case mallory-mp-light exhibit-subheading" id="exhibit1_alt_subheading_back">Once a month, Thursdays at 4 pm</h5>
-                <hr />
-                <p>Join us this fall for a special series of gallery talks! Yale Peabody Museum curators and collections managers will feature a few remarkable objects from our collections in a 20-minute presentation, followed by Q&amp;A.</p>
-                <p class="button-row"><a data-link-parent="card_event1_alt" class="btn btn-peabody back-link" href="http://peabody.yale.edu/events/yale-peabody-museum-gallery-talks" role="button" title="More info: Gallery Talks" aria-label="More info: Gallery Talks">More Info</a></p>
-                
-            {% elseif cardType == 'call_to_action' %}
-                
-                
-                
-            {% elseif cardType == 'call_to_action_2' %}
-                
-                
-                
-            {% elseif cardType == 'survey' %}
-                
-                
-                
-            {% endif %}
-            {# /BREAK - CARD TYPES #}
-            </div>
-        </figure> {# /BACK #}
+        {% elseif cardType == 'call_to_action' %}
+            <figure class="back">
+                <div class="back-content">
+                    {% if content.field_back_heading %}
+                        <strong class="box-header">{{ content.field_back_heading.0 }}</strong>
+                    {% endif %}
+                    {% if content.body %}
+                        {{ content.body.0 }}
+                    {% endif %}
+                    {% if content.field_back_button %}
+                        <p class="button-row"><a data-link-parent="card_cta_{{ node.id }}_{{ seed }}" class="btn btn-peabody back-link" href="{{ node.field_back_button[0].url }}" role="button" title="More info: {{ node.label }}" aria-label="More info: {{ node.label }}">{{ node.field_back_button[0].title }}</a></p>
+                    {% endif %}
+                </div>
+            </figure>
+
+        {% elseif cardType == 'call_to_action_2' %}
+            <figure class="back diagonal-back">
+                <div class="back-content">
+                    <div class="back-top back-left">
+                        {% if content.field_back_heading_1 %}
+                            <strong class="event-back-heading-double">{{ content.field_back_heading_1.0 }}</strong>
+                        {% endif %}
+                        {% if content.field_back_body_text_1 %}
+                            <p>{{ content.field_back_body_text_1.0}}</p>
+                        {% endif %}
+                        {% if content.field__more_info_button_1 %}
+                            <p class="button-row"><a data-link-parent="card_cta_{{ node.id }}_{{ seed }}" class="btn btn-peabody back-link" href="{{ node.field__more_info_button_1[0].url }}" role="button" title="More info: {{ node.label }}" aria-label="More info: {{ node.label }}">{{ node.field__more_info_button_1[0].title }}</a></p>
+                        {% endif %}
+                    </div>
+                    <div class="back-bottom back-right">
+                        {% if content.field_back_heading_2 %}
+                            <strong class="event-back-heading-double">{{ content.field_back_heading_2.0 }}</strong>
+                        {% endif %}
+                        {% if content.field_back_body_text_2 %}
+                            <p>{{ content.field_back_body_text_2.0}}</p>
+                        {% endif %}
+                        {% if content.field__more_info_button_2 %}
+                            <p class="button-row"><a data-link-parent="card_cta_{{ node.id }}_{{ seed }}" class="btn btn-peabody back-link" href="{{ node.field__more_info_button_2[0].url }}" role="button" title="More info: {{ node.label }}" aria-label="More info: {{ node.label }}">{{ node.field__more_info_button_2[0].title }}</a></p>
+                        {% endif %}
+                    </div>
+                </div>
+            </figure>
+
+        {% elseif cardType == 'survey' %}
+
+
+
+        {% endif %}
+        {# /BREAK - CARD TYPES #}
         
     </div>
 </div>
-    
 
-
-{#
-<div class="col-md-6">
-    <div class="box-item box" id="card_event1_alt">
-        <figure class="front photo-front photo-front-shadow-topbottom" style="background-image:url('img/cards/events_exhibitions/gallery_talk_web_card_mini.jpg'); background-position: left;">
-            <div class="front-content">
-                <h2 class="box-header">Gallery Talks</h2>
-                <h5 class="box-date box-date-right">NEXT: March 22, 2018</h5>
-            </div>
-        </figure>
-        <figure class="back">
-            <div class="back-content">
-                <h5 class="box-header"><strong>Spring 2018 Semester Series</strong></h5>
-                <h3 class="left plain-case mallory-thin exhibit-heading" id="exhibit1_alt_heading_back">Gallery Talks</h3>
-                <h5 class="left plain-case mallory-mp-light exhibit-subheading" id="exhibit1_alt_subheading_back">Once a month, Thursdays at 4 pm</h5>
-                <hr />
-                <p>Join us this fall for a special series of gallery talks! Yale Peabody Museum curators and collections managers will feature a few remarkable objects from our collections in a 20-minute presentation, followed by Q&amp;A.</p>
-                <p class="button-row"><a data-link-parent="card_event1_alt" class="btn btn-peabody back-link" href="http://peabody.yale.edu/events/yale-peabody-museum-gallery-talks" role="button" title="More info: Gallery Talks" aria-label="More info: Gallery Talks">More Info</a></p>
-            </div>
-        </figure>
-    </div>
-</div>
-#}

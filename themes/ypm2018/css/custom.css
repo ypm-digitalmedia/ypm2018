@@ -1,5 +1,5 @@
 @import url("mallory_font.css");
-@import url("../fonts/FontAwesome_5.0.6/css/fontawesome-all.min.css");
+/*@import url("../fonts/FontAwesome_5.0.6/css/fontawesome-all.min.css");*/
 
 /* ==================================================================================
    PAGE ELEMENTS & BOOTSTRAP OVERRIDES
@@ -130,6 +130,27 @@ h2.section-subtitle {
     font-size: 1.75rem!important;
 }
 
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.plain-case {
+    text-transform: none!important;
+}
+
+.normal-weight {
+    font-weight: normal!important;
+}
+
+
 /* ==================================================================================
    NAVIGATION
    ================================================================================== */
@@ -208,7 +229,7 @@ h2.section-subtitle {
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ff63aaff', endColorstr='#ff01356b', GradientType=0);
     filter: progid: DXImageTransform.Microsoft.gradient(enabled=false);
     background-repeat: repeat-x;
-    border-color: #63aaff;
+    border-color: #01356b;
     color: white!important;
     /*color: rgb(51, 51, 51);*/
     -webkit-transition: 0.2s all ease-in;
@@ -216,6 +237,7 @@ h2.section-subtitle {
     font-family: "Mallory Bold";
     text-transform: uppercase;
     cursor: pointer;
+    font-size: 14px!important;
 }
 
 .btn-peabody:hover,
@@ -232,10 +254,11 @@ h2.section-subtitle {
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#ffdde6ee', endColorstr='#ff63aaff', GradientType=0);
     filter: progid: DXImageTransform.Microsoft.gradient(enabled=false);
     background-repeat: repeat-x;
-    border-color: #01356b;
+    border-color: #63aaff;
     -webkit-transition: 0.2s all ease-in;
     transition: 0.2s all ease-in;
     cursor: pointer;
+    font-size: 14px!important;
 }
 
 
@@ -251,7 +274,6 @@ h2.section-subtitle {
 }
 
 .box p {
-    /*text-align: justify;*/
     font-size: 13px;
     text-align: left;
 }
@@ -264,51 +286,15 @@ h2.section-subtitle {
     margin: 0 0 0.5em 0;
 }
 
-.box-with-header {
-    border: #708fb8 1px solid;
-    padding: 0 0 1em 0;
-    margin: 1em;
-}
-
-.box-with-header p {
-    padding: 1em;
-    text-align: justify;
-}
-
-.box-with-header h2.box-header {
-    width: 100%;
-    background-color: #708fb8;
-    padding: 0.25em 0.5em;
-    margin: 0;
-    color: white;
-}
-
 .back .box-header {
     margin-top: 0;
+    color: black;
+    text-shadow: none;
 }
 
 .back h2,
 .back h3 {
     margin-top: 10px;
-}
-
-.box-with-footer {
-    border: #708fb8 1px solid;
-    padding: 0 0 1em 0;
-    margin: 1em;
-}
-
-.box-with-footer p {
-    padding: 1em;
-    text-align: justify;
-}
-
-.box-with-footer h2.box-footer {
-    width: 100%;
-    background-color: #708fb8;
-    padding: 0.25em 0.5em;
-    margin: 0;
-    color: white;
 }
 
 .box-item {
@@ -341,6 +327,12 @@ h2.section-subtitle {
     width: 100%;
 }
 
+.back-content p {
+    line-height: 1rem;
+    font-size: 13px;
+    text-align: left;
+    margin-top: 10px;
+}
 
 .box-item figure {
     margin: 0;
@@ -352,10 +344,6 @@ h2.section-subtitle {
     -moz-transition: 0.5s all ease-out;
     transition: 0.5s all ease-out;
     padding: 1em;
-}
-
-.box-item.box-with-header figure {
-    padding: 0;
 }
 
 .box-item .front {
@@ -381,10 +369,30 @@ h2.section-subtitle {
     overflow: hidden;
     -webkit-opacity: 1;
     -moz-opacity: 1;
-/*    opacity: 0;*/
+    opacity: 0;
     -webkit-transition: 0.6s all ease-out;
     -moz-transition: 0.6s all ease-out;
     transition: 0.6s all ease-out;
+}
+
+.exhibit-heading {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+    font-size: 1.7rem;
+}
+
+.exhibit-subheading {
+    letter-spacing: 0.04em;
+    margin-top: 0.3em;
+    font-size: 1rem;
+}
+
+.event-back-heading-double {
+    margin-top: 0.5em;
+}
+
+.event-back-heading {
+    margin-top: 0;
 }
 
 .shadow {
@@ -464,7 +472,7 @@ h2.section-subtitle {
 
 .box-date {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     -webkit-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
     -moz-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
@@ -483,19 +491,9 @@ h2.section-subtitle {
     left: 15px;
 }
 
-.box-with-header .box-date {
-    position: relative;
-    top: 220px;
-}
-
 .box .box-date-right {
     margin-right: -1em;
 }
-
-.box-with-header .box-date-right {
-    margin-right: 0;
-}
-
 
 /* ==================================================================================
    SLIDERS

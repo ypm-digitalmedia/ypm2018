@@ -1,0 +1,16 @@
+name: URL Redirect
+type: module
+description: Redirect User / Role for specific menu item.
+package: Other
+# version: VERSION
+# core: 8.x
+
+configure: entity.url_redirect.collection
+# permissions = admin/people/permissions#edit-access-url-redirect-settings-page
+
+
+# Information added by Drupal.org packaging script on 2018-02-15
+version: '8.x-2.6'
+core: '8.x'
+project: 'url_redirect'
+datestamp: 1518667386

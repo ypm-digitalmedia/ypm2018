@@ -1,4 +1,0 @@
-global:
-  css:
-    base:
-      assets/dist/styles/main.css: {}
