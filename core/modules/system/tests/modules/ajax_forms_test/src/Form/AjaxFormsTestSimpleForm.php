@@ -8,6 +8,8 @@ use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Form builder: Builds a form that triggers a simple AJAX callback.
+ *
+ * @internal
  */
 class AjaxFormsTestSimpleForm extends FormBase {
 
@@ -63,7 +65,7 @@ class AjaxFormsTestSimpleForm extends FormBase {
       $form['select_' . $key . '_callback'] = [
         '#type' => 'select',
         '#title' => $this->t('Test %key callbacks', ['%key' => $key]),
-        '#options' => ['red' => 'red'],
+        '#options' => ['red' => 'red', 'green' => 'green'],
         '#ajax' => ['callback' => $value],
       ];
     }

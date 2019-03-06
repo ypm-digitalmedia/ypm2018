@@ -479,7 +479,7 @@ function hook_install_tasks_alter(&$tasks, $install_state) {
 /**
  * Perform a single update between minor versions.
  *
- * hook_update_N() can only be used to update between minor versions of a
+ * Hook hook_update_N() can only be used to update between minor versions of a
  * module. To upgrade between major versions of Drupal (for example, between
  * Drupal 7 and 8), use the @link migrate Migrate API @endlink instead.
  *
@@ -676,12 +676,27 @@ function hook_update_N(&$sandbox) {
  * These updates are executed after all hook_update_N() implementations. At this
  * stage Drupal is already fully repaired so you can use any API as you wish.
  *
- * NAME can be arbitrary machine names. In contrast to hook_update_N() the order
- * of functions in the file is the only thing which ensures the execution order
- * of those functions.
+ * NAME can be arbitrary machine names. In contrast to hook_update_N() the
+ * alphanumeric naming of functions in the file is the only thing which ensures
+ * the execution order of those functions. If update order is mandatory,
+ * you should add numerical prefix to NAME or make it completely numerical.
  *
  * Drupal also ensures to not execute the same hook_post_update_NAME() function
  * twice.
+ *
+ * @section sec_bulk Batch updates
+ * If running your update all at once could possibly cause PHP to time out, use
+ * the $sandbox parameter to indicate that the Batch API should be used for your
+ * update. In this case, your update function acts as an implementation of
+ * callback_batch_operation(), and $sandbox acts as the batch context
+ * parameter. In your function, read the state information from the previous
+ * run from $sandbox (or initialize), run a chunk of updates, save the state in
+ * $sandbox, and set $sandbox['#finished'] to a value between 0 and 1 to
+ * indicate the percent completed, or 1 if it is finished (you need to do this
+ * explicitly in each pass).
+ *
+ * See the @link batch Batch operations topic @endlink for more information on
+ * how to use the Batch API.
  *
  * @param array $sandbox
  *   Stores information for batch updates. See above for more information.
@@ -932,7 +947,7 @@ function hook_requirements($phase) {
     $requirements['drupal'] = [
       'title' => t('Drupal'),
       'value' => \Drupal::VERSION,
-      'severity' => REQUIREMENT_INFO
+      'severity' => REQUIREMENT_INFO,
     ];
   }
 

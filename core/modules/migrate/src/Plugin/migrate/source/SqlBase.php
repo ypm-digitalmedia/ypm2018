@@ -24,8 +24,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * - target: (optional) The database target name. Defaults to 'default'.
  * - batch_size: (optional) Number of records to fetch from the database during
  *   each batch. If omitted, all records are fetched in a single query.
- * - ignore_map: (optional) Source data is joined to the map table by default.
- *   If set to TRUE, the map table will not be joined.
+ * - ignore_map: (optional) Source data is joined to the map table by default to
+ *   improve migration performance. If set to TRUE, the map table will not be
+ *   joined. Using expressions in the query may result in column aliases in the
+ *   JOIN clause which would be invalid SQL. If you run into this, set
+ *   ignore_map to TRUE.
  *
  * For other optional configuration keys inherited from the parent class, refer
  * to \Drupal\migrate\Plugin\migrate\source\SourcePluginBase.
@@ -105,6 +108,11 @@ abstract class SqlBase extends SourcePluginBase implements ContainerFactoryPlugi
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MigrationInterface $migration, StateInterface $state) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $migration);
     $this->state = $state;
+    // If we are using high water, but haven't yet set a high water mark, skip
+    // joining the map table, as we want to get all available records.
+    if ($this->getHighWaterProperty() && $this->getHighWater() === NULL) {
+      $this->configuration['ignore_map'] = TRUE;
+    }
   }
 
   /**
@@ -319,7 +327,9 @@ abstract class SqlBase extends SourcePluginBase implements ContainerFactoryPlugi
       if ($this->getHighWaterProperty()) {
         $high_water_field = $this->getHighWaterField();
         $high_water = $this->getHighWater();
-        if ($high_water) {
+        // We check against NULL because 0 is an acceptable value for the high
+        // water mark.
+        if ($high_water !== NULL) {
           $conditions->condition($high_water_field, $high_water, '>');
           $condition_added = TRUE;
         }
@@ -346,7 +356,9 @@ abstract class SqlBase extends SourcePluginBase implements ContainerFactoryPlugi
     if (($this->batchSize > 0)) {
       $this->query->range($this->batch * $this->batchSize, $this->batchSize);
     }
-    return new \IteratorIterator($this->query->execute());
+    $statement = $this->query->execute();
+    $statement->setFetchMode(\PDO::FETCH_ASSOC);
+    return new \IteratorIterator($statement);
   }
 
   /**
@@ -379,7 +391,7 @@ abstract class SqlBase extends SourcePluginBase implements ContainerFactoryPlugi
    * {@inheritdoc}
    */
   public function count($refresh = FALSE) {
-    return $this->query()->countQuery()->execute()->fetchField();
+    return (int) $this->query()->countQuery()->execute()->fetchField();
   }
 
   /**

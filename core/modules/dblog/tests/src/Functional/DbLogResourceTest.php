@@ -62,11 +62,11 @@ class DbLogResourceTest extends ResourceTestBase {
       ->fetchField();
 
     $this->initAuthentication();
-    $url = Url::fromRoute('rest.dblog.GET.' . static::$format, ['id' => $id, '_format' => static::$format]);
+    $url = Url::fromRoute('rest.dblog.GET', ['id' => $id, '_format' => static::$format]);
     $request_options = $this->getAuthenticationRequestOptions('GET');
 
     $response = $this->request('GET', $url, $request_options);
-    $this->assertResourceErrorResponse(403, "The 'restful get dblog' permission is required.", $response);
+    $this->assertResourceErrorResponse(403, "The 'restful get dblog' permission is required.", $response, ['4xx-response', 'http_response'], ['user.permissions'], FALSE, FALSE);
 
     // Create a user account that has the required permissions to read
     // the watchdog resource via the REST API.

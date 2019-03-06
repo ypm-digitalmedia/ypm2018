@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * The bootstrap_site_alert install file.
+ */
+
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_install().
+ */
+function bootstrap_site_alert_install() {
+  // Add default permissions for viewing.
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, array('view bootstrap site alerts'));
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, array('view bootstrap site alerts'));
+}
+
+/**
+ * Implements hook_uninstall().
+ *
+ * Not 100% sure if this is needed, but putting it here for now.
+ */
+function bootstrap_site_alert_uninstall() {
+  \Drupal::service('config.factory')->getEditable('bootstrap_site_alert.settings')->delete();
+}
+
+/**
+ * Add in Default Permissions for Viewing the Site Alert.
+ */
+function bootstrap_site_alert_update_8101() {
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, array('view bootstrap site alerts'));
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, array('view bootstrap site alerts'));
+}
+
+/**
+ * Remove all config since we are now using states in the forms.
+ */
+function bootstrap_site_alert_update_8102() {
+  \Drupal::service('config.factory')->getEditable('bootstrap_site_alert.settings')->delete();
+}

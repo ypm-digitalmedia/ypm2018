@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * The bootstrap_site_alert module file.
+ */
+
+/**
+ * Implements hook_page_top().
+ */
+function bootstrap_site_alert_page_top(array &$page_top) {
+  // Should we show on admin pages?
+  $show_admin = \Drupal::state()->get('bootstrap_site_alert_no_admin', 0) ?
+    !\Drupal::service('router.admin_context')->isAdminRoute() :
+    TRUE;
+
+  // If active this is set.
+  if (\Drupal::state()->get('bootstrap_site_alert_active', 0) &&
+      \Drupal::currentUser()->hasPermission('view bootstrap site alerts') &&
+      $show_admin) {
+    // Get variables.
+    $level = \Drupal::state()->get('bootstrap_site_alert_severity', NULL);
+
+    $message = \Drupal::state()->get('bootstrap_site_alert_message', NULL);
+
+    $alert = '<div class="alert bs-site-alert ' . $level . '" role="alert"';
+
+    // If dismissable, add 'close' button. Also add 'display:none' to the alert
+    // element to prevent it from momentarily flickering onscreen before we
+    // have a chance to hide it.
+    if (\Drupal::state()->get('bootstrap_site_alert_dismiss', 0)) {
+      $alert .= ' style="display:none;">';
+      $alert .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+    }
+    else {
+      $alert  .= '>';
+    }
+
+    $alert .= isset($message['value']) ? t($message['value']): NULL;
+    $alert .= '</div>';
+
+    $page_top['bootstrap_site_alert'] = [
+      '#type' => 'inline_template',
+      '#template' => $alert,
+      '#weight' => 1000,
+    ];
+
+    // If dismissable, attach JavaScript file and configure drupalSettings.
+    if (\Drupal::state()->get('bootstrap_site_alert_dismiss')) {
+
+      // A random key is generated whenever an alert has changed. Pass this key
+      // to drupalSettings so that it is accessible via JavaScript.
+      $key = \Drupal::state()->get('bootstrap_site_alert_key');
+
+      $page_top['bootstrap_site_alert']['#attached'] = [
+        'library' => ['bootstrap_site_alert/dismissed-cookie'],
+        'drupalSettings' => [
+          'bootstrap_site_alert' => [
+            'dismissedCookie' => [
+              'key' => $key
+            ],
+          ],
+        ],
+      ];
+    }
+  }
+}

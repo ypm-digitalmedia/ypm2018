@@ -31,8 +31,24 @@ trait BasicAuthResourceTestTrait {
   /**
    * {@inheritdoc}
    */
-  protected function assertResponseWhenMissingAuthentication(ResponseInterface $response) {
-    $this->assertResourceErrorResponse(401, 'No authentication credentials provided.', $response);
+  protected function assertResponseWhenMissingAuthentication($method, ResponseInterface $response) {
+    if ($method !== 'GET') {
+      return $this->assertResourceErrorResponse(401, 'No authentication credentials provided.', $response);
+    }
+
+    $expected_page_cache_header_value = $method === 'GET' ? 'MISS' : FALSE;
+    $expected_cacheability = $this->getExpectedUnauthorizedAccessCacheability()
+      ->addCacheableDependency($this->getExpectedUnauthorizedEntityAccessCacheability(FALSE))
+      // @see \Drupal\basic_auth\Authentication\Provider\BasicAuth::challengeException()
+      ->addCacheableDependency($this->config('system.site'))
+      // @see \Drupal\Core\EventSubscriber\AnonymousUserResponseSubscriber::onRespond()
+      ->addCacheTags(['config:user.role.anonymous']);
+    // Only add the 'user.roles:anonymous' cache context if its parent cache
+    // context is not already present.
+    if (!in_array('user.roles', $expected_cacheability->getCacheContexts(), TRUE)) {
+      $expected_cacheability->addCacheContexts(['user.roles:anonymous']);
+    }
+    $this->assertResourceErrorResponse(401, 'No authentication credentials provided.', $response, $expected_cacheability->getCacheTags(), $expected_cacheability->getCacheContexts(), $expected_page_cache_header_value, FALSE);
   }
 
   /**

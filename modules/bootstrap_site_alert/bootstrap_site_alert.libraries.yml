@@ -1,0 +1,8 @@
+dismissed-cookie:
+  version: 1.x
+  js:
+    js/dismissed-cookie.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.cookie
+    - core/drupalSettings

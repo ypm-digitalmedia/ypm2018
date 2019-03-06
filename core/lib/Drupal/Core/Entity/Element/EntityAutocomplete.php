@@ -39,7 +39,7 @@ class EntityAutocomplete extends Textfield {
     $info['#validate_reference'] = TRUE;
     // IMPORTANT! This should only be set to FALSE if the #default_value
     // property is processed at another level (e.g. by a Field API widget) and
-    // it's value is properly checked for access.
+    // its value is properly checked for access.
     $info['#process_default_value'] = TRUE;
 
     $info['#element_validate'] = [[$class, 'validateEntityAutocomplete']];
@@ -251,8 +251,8 @@ class EntityAutocomplete extends Textfield {
   /**
    * Finds an entity from an autocomplete input without an explicit ID.
    *
-   * The method will return an entity ID if one single entity unambuguously
-   * matches the incoming input, and sill assign form errors otherwise.
+   * The method will return an entity ID if one single entity unambiguously
+   * matches the incoming input, and assign form errors otherwise.
    *
    * @param \Drupal\Core\Entity\EntityReferenceSelection\SelectionInterface $handler
    *   Entity reference selection plugin.

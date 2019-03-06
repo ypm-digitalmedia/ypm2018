@@ -2,6 +2,9 @@
 
 namespace Drupal\Tests\serialization\Unit\Normalizer;
 
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\CreatedItem;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\Field\Plugin\Field\FieldType\TimestampItem;
@@ -17,6 +20,8 @@ use Symfony\Component\Serializer\Serializer;
  * @coversDefaultClass \Drupal\serialization\Normalizer\TimestampItemNormalizer
  */
 class TimestampItemNormalizerTest extends UnitTestCase {
+
+  use InternalTypedDataTestTrait;
 
   /**
    * @var \Drupal\serialization\Normalizer\TimestampItemNormalizer
@@ -77,8 +82,18 @@ class TimestampItemNormalizerTest extends UnitTestCase {
     $timestamp_item->getIterator()
       ->willReturn(new \ArrayIterator(['value' => 1478422920]));
 
-    $serializer = new Serializer();
-    $this->normalizer->setSerializer($serializer);
+    $value_property = $this->getTypedDataProperty(FALSE);
+    $timestamp_item->getProperties(TRUE)
+      ->willReturn(['value' => $value_property])
+      ->shouldBeCalled();
+
+    $serializer_prophecy = $this->prophesize(Serializer::class);
+
+    $serializer_prophecy->normalize($value_property, NULL, [])
+      ->willReturn(1478422920)
+      ->shouldBeCalled();
+
+    $this->normalizer->setSerializer($serializer_prophecy->reveal());
 
     $normalized = $this->normalizer->normalize($timestamp_item->reveal());
     $this->assertSame($expected, $normalized);
@@ -96,6 +111,29 @@ class TimestampItemNormalizerTest extends UnitTestCase {
     $timestamp_item = $this->createTimestampItemProphecy();
     // The field item should be set with the expected timestamp.
     $timestamp_item->setValue(['value' => $expected])
+      ->shouldBeCalled();
+
+    // Avoid a static method call by returning dummy property data.
+    $field_definition = $this->prophesize(FieldDefinitionInterface::class);
+    $timestamp_item
+      ->getFieldDefinition()
+      ->willReturn($field_definition->reveal())
+      ->shouldBeCalled();
+    $timestamp_item->getPluginDefinition()
+      ->willReturn([
+        'serialized_property_names' => [
+          'foo' => 'bar',
+        ],
+      ])
+      ->shouldBeCalled();
+    $entity = $this->prophesize(EntityInterface::class);
+    $entity_type = $this->prophesize(EntityTypeInterface::class);
+    $entity->getEntityType()
+      ->willReturn($entity_type->reveal())
+      ->shouldBeCalled();
+    $timestamp_item
+      ->getEntity()
+      ->willReturn($entity->reveal())
       ->shouldBeCalled();
 
     $context = ['target_instance' => $timestamp_item->reveal()];
@@ -134,7 +172,32 @@ class TimestampItemNormalizerTest extends UnitTestCase {
   public function testDenormalizeException() {
     $this->setExpectedException(UnexpectedValueException::class, 'The specified date "2016/11/06 09:02am GMT" is not in an accepted format: "U" (UNIX timestamp), "Y-m-d\TH:i:sO" (ISO 8601), "Y-m-d\TH:i:sP" (RFC 3339).');
 
-    $context = ['target_instance' => $this->createTimestampItemProphecy()->reveal()];
+    $timestamp_item = $this->createTimestampItemProphecy();
+
+    // Avoid a static method call by returning dummy serialized property data.
+    $field_definition = $this->prophesize(FieldDefinitionInterface::class);
+    $timestamp_item
+      ->getFieldDefinition()
+      ->willReturn($field_definition->reveal())
+      ->shouldBeCalled();
+    $timestamp_item->getPluginDefinition()
+      ->willReturn([
+        'serialized_property_names' => [
+          'foo' => 'bar',
+        ],
+      ])
+      ->shouldBeCalled();
+    $entity = $this->prophesize(EntityInterface::class);
+    $entity_type = $this->prophesize(EntityTypeInterface::class);
+    $entity->getEntityType()
+      ->willReturn($entity_type->reveal())
+      ->shouldBeCalled();
+    $timestamp_item
+      ->getEntity()
+      ->willReturn($entity->reveal())
+      ->shouldBeCalled();
+
+    $context = ['target_instance' => $timestamp_item->reveal()];
 
     $normalized = ['value' => '2016/11/06 09:02am GMT'];
     $this->normalizer->denormalize($normalized, TimestampItem::class, NULL, $context);
